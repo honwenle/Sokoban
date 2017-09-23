@@ -56,11 +56,9 @@ cvsx.addEventListener('click',function (e) {
     var y = (e.clientY - $('.cvs')[0].offsetTop) / SIZE | 0;
     if (toolid > 0 && toolid < 4) {
         ctx.drawImage(imgList[toolid], x*SIZE, y*SIZE, SIZE, SIZE);
-        list[y][x] = toolid;alert(getID(y,x))
+        list[y][x] = toolid;
         var boxindex = boxList.indexOf(getID(y, x));
-        alert(boxindex)
         if (boxindex > -1) {
-alert(‘ok’)
             boxList.splice(boxindex, 1);
         }
     }
