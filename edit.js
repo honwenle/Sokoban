@@ -3,6 +3,8 @@ var ctx = cvs.getContext('2d');
 cvs.width = 0;
 cvs.height = 0;
 var SIZE;
+var cvsx = document.getElementById('cvsx');
+var ctxx = cvs.getContext('2d');
 
 var rows, cols;
 $('#size_ok').click(function () {
@@ -12,6 +14,8 @@ $('#size_ok').click(function () {
     SIZE = ~~(screen.availWidth / cols);
     cvs.width = SIZE * cols;
     cvs.height = SIZE * rows;
+    cvsx.width = SIZE * cols;
+    cvsx.height = SIZE * rows;
     drawBack();
 })
 
@@ -24,10 +28,13 @@ srcList.forEach(function (item) {
     $('.tools').append(img);
 })
 
+var list = [];
 function drawBack () {
     for (var i = 0; i < rows; i++) {
+        list[i] = [];
         for (var j = 0; j < cols; j++) {
             ctx.drawImage(imgList[1], j*SIZE, i*SIZE, SIZE, SIZE);
+            list[i][j] = 1;
         }
     }
 }
@@ -39,11 +46,14 @@ $('.tools img').click(function () {
     toolid = $(this).index();
 })
 
-cvs.addEventListener('click',function (e) {
+cvsx.addEventListener('click',function (e) {
     if (toolid === null) {
         return false;
     }
-    var x = (e.clientX - cvs.offsetLeft) / SIZE | 0;
-    var y = (e.clientY - cvs.offsetTop) / SIZE | 0;
-    ctx.drawImage(imgList[toolid], x*SIZE, y*SIZE, SIZE, SIZE);
+    var x = e.clientX / SIZE | 0;
+    var y = (e.clientY - $('.cvs')[0].offsetTop) / SIZE | 0;
+    if (toolid > 0 && toolid < 4) {
+        ctx.drawImage(imgList[toolid], x*SIZE, y*SIZE, SIZE, SIZE);
+        list[y][x] = toolid;
+    }
 }, false);

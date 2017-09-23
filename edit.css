@@ -17,3 +17,11 @@ input{
 .tools img.on{
     border: 1px solid #f00;
 }
+.cvs{
+    position: relative;
+}
+.cvs canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
