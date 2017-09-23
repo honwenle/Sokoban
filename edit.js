@@ -81,5 +81,5 @@ function getID(row, col) {
     return row*10 + col
 }
 function generate () {
-    location.href = location.origin + '/index.html?list=' + JSON.stringify(list) + '&box=' + JSON.stringify(boxList) + '&hero=' + JSON.stringify(hero) 
+    location.href = './index.html?list=' + JSON.stringify(list) + '&box=' + JSON.stringify(boxList) + '&hero=' + JSON.stringify(hero);
 }
