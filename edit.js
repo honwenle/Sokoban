@@ -4,7 +4,7 @@ cvs.width = 0;
 cvs.height = 0;
 var SIZE;
 var cvsx = document.getElementById('cvsx');
-var ctxx = cvs.getContext('2d');
+var ctxx = cvsx.getContext('2d');
 
 var rows, cols;
 $('#size_ok').click(function () {
@@ -65,6 +65,11 @@ cvsx.addEventListener('click',function (e) {
         if (boxList.indexOf(boxid) < 0) {
             boxList.push(boxid);
         }
+    }
+    if (toolid == 0 && list[y][x] == 2) {
+        ctxx.clearRect(0, 0, SIZE*cols, SIZE*rows);
+        ctxx.drawImage(imgList[toolid], x*SIZE, y*SIZE, SIZE, SIZE);
+        hero = [y, x];
     }
 }, false);
 
