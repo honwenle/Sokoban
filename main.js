@@ -1,27 +1,35 @@
-var list = [
-    [0,0,1,1,1,1],
-    [1,1,1,2,3,1],
-    [1,2,2,2,3,1],
-    [1,2,2,2,2,1],
-    [1,1,2,2,1,1],
-    [0,1,1,1,1,0]
-]
-var boxList = [
-    getID(2,2), getID(3,3)
-];
-var hero = [4,2];
-var rows = list.length,
-    cols = list[0].length;
+var list, boxList, hero;
+var rows, cols;
 
 var back = document.getElementById('back');
 var bctx = back.getContext('2d');
-SIZE = ~~(screen.availWidth / cols);
-back.width = SIZE * cols;
-back.height = SIZE * rows;
+var SIZE;
 var cvs = document.getElementById('cvs');
 var ctx = cvs.getContext('2d');
-cvs.width = SIZE * cols;
-cvs.height = SIZE * rows;
+
+var lv = getString('lv') || 0;
+
+var diy = getString('list');
+
+function init () {
+    if (diy) {
+        list = JSON.parse(diy);
+        boxList = JSON.parse(getString('box'));
+        hero = JSON.parse(getString('hero'));
+    } else {
+        list = LIST[lv];
+        boxList = BOXLIST[lv];
+        hero = HERO[lv];
+    }
+    rows = list.length,
+    cols = list[0].length;
+    SIZE = ~~(screen.availWidth / cols);
+    back.width = SIZE * cols;
+    back.height = SIZE * rows;
+    cvs.width = SIZE * cols;
+    cvs.height = SIZE * rows;
+}
+init();
 
 srcList = ['hero.png','wall.jpg','floor.jpg','target.jpg','box0.jpg','box1.jpg'];
 imgList = [];
@@ -43,6 +51,7 @@ function loading () {
 }
 
 function drawBack () {
+    bctx.clearRect(0, 0, SIZE*cols, SIZE*rows);
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
             if (list[i][j] > 0) {
