@@ -57,7 +57,7 @@ function drawBox () {
     ctx.clearRect(0, 0, SIZE*cols, SIZE*rows);
     boxList.forEach(function (box) {
         var xy = getXY(box);
-        ctx.drawImage(imgList[4+(list[xy[1]][xy[0]] == 3)], xy[1]*SIZE, xy[0]*SIZE, SIZE, SIZE);
+        ctx.drawImage(imgList[4+(list[xy[0]][xy[1]] == 3)], xy[1]*SIZE, xy[0]*SIZE, SIZE, SIZE);
     })
     ctx.drawImage(imgList[0], hero[1]*SIZE, hero[0]*SIZE, SIZE, SIZE);
 }
@@ -95,10 +95,18 @@ userPlay();
 function moveHero (dir, dis) {
     var next = [hero[0], hero[1]];
     next[dir] += dis;
-    if (boxList.indexOf(getID(next[0],next[1])) > -1) {
-        console.log('box')
+    var boxindex = boxList.indexOf(getID(next[0],next[1]));
+    if (boxindex > -1) {
+        var nextx = [next[0], next[1]];
+        nextx[dir] += dis;
+        var nextxid = getID(nextx[0],nextx[1])
+        if (boxList.indexOf(nextxid) < 0 && list[nextx[0]][nextx[1]] > 1) {
+            hero = next;
+            boxList.splice(boxindex, 1);
+            boxList.push(nextxid);
+        }
     } else if (list[next[0]][next[1]] > 1) {
         hero = next;
-        drawBox();
     }
+    drawBox();
 }
