@@ -57,7 +57,7 @@ cvsx.addEventListener('click',function (e) {
     if (toolid > 0 && toolid < 4) {
         ctx.drawImage(imgList[toolid], x*SIZE, y*SIZE, SIZE, SIZE);
         list[y][x] = toolid;
-        var boxindex = boxList.index(get(y, x));
+        var boxindex = boxList.indexOf(getID(y, x));
         if (boxindex > -1) {
             boxList.splice(boxindex, 1);
         }
