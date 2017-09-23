@@ -77,9 +77,6 @@ function userPlay () {
         sX = e.touches[0].pageX;
         sY = e.touches[0].pageY;
     }, false);
-    document.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-    }, false);
     document.addEventListener('touchend', function (e) {
         var eX = e.changedTouches[0].pageX,
             eY = e.changedTouches[0].pageY;
