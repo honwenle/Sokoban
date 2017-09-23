@@ -16,7 +16,6 @@ var rows = list.length,
 var back = document.getElementById('back');
 var bctx = back.getContext('2d');
 SIZE = ~~(screen.availWidth / cols);
-SCALE = SIZE / 35;
 back.width = SIZE * cols;
 back.height = SIZE * rows;
 var cvs = document.getElementById('cvs');
