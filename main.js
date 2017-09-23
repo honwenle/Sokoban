@@ -70,8 +70,28 @@ function getXY(id) {
 function getID(row, col) {
     return row*10 + col
 }
-
+var sX, sY;
 function userPlay () {
+    cvs.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        sX = e.touches[0].pageX;
+        sY = e.touches[0].pageY;
+    }, false);
+    cvs.addEventListener('touchend', function (e) {
+        var eX = e.changedTouches[0].pageX,
+            eY = e.changedTouches[0].pageY;
+        var dtX = eX - sX,
+            dtY = eY - sY;
+        if (dtX > 20 && dtX > Math.abs(dtY)) {
+            moveHero(1, 1);
+        } else if (dtX < -20 && dtX < -Math.abs(dtY)) {
+            moveHero(1, -1);
+        } else if (dtY > 20) {
+            moveHero(0, 1);
+        } else if (dtY < -20) {
+            moveHero(0, -1);
+        }
+    }, false);
     document.onkeydown = function (e) {
         switch (e.keyCode) {
             case 37:
