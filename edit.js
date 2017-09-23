@@ -28,7 +28,9 @@ srcList.forEach(function (item) {
     $('.tools').append(img);
 })
 
-var list = [];
+var list = [],
+    boxList = [],
+    hero;
 function drawBack () {
     for (var i = 0; i < rows; i++) {
         list[i] = [];
@@ -56,4 +58,16 @@ cvsx.addEventListener('click',function (e) {
         ctx.drawImage(imgList[toolid], x*SIZE, y*SIZE, SIZE, SIZE);
         list[y][x] = toolid;
     }
+    if (toolid > 3) {
+        ctx.drawImage(imgList[toolid], x*SIZE, y*SIZE, SIZE, SIZE);
+        list[y][x] = toolid - 2;
+        var boxid = getID(y, x);
+        if (boxList.indexOf(boxid) < 0) {
+            boxList.push(boxid);
+        }
+    }
 }, false);
+
+function getID(row, col) {
+    return row*10 + col
+}
