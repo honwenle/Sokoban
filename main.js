@@ -94,9 +94,11 @@ function getID(row, col) {
 var sX, sY;
 function userPlay () {
     document.addEventListener('touchstart', function (e) {
-        e.preventDefault();
         sX = e.touches[0].pageX;
         sY = e.touches[0].pageY;
+    }, false);
+    document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
     }, false);
     document.addEventListener('touchend', function (e) {
         var eX = e.changedTouches[0].pageX,
