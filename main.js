@@ -61,11 +61,26 @@ function drawBack () {
 
 function drawBox () {
     ctx.clearRect(0, 0, SIZE*cols, SIZE*rows);
+    var isWin = true;
     boxList.forEach(function (box) {
         var xy = getXY(box);
-        ctx.drawImage(imgList[4+(list[xy[0]][xy[1]] == 3)], xy[1]*SIZE, xy[0]*SIZE, SIZE, SIZE);
+        var onTarget = list[xy[0]][xy[1]] == 3;
+        ctx.drawImage(imgList[4 + onTarget], xy[1]*SIZE, xy[0]*SIZE, SIZE, SIZE);
+        if (!onTarget) {
+            isWin = false;
+        }
     })
     ctx.drawImage(imgList[0], hero[1]*SIZE, hero[0]*SIZE, SIZE, SIZE);
+    isWin && (nextlv.style.display = 'inline');
+}
+function win() {
+    if (lv+1 < LIST.length) {
+        nextlv.style.display = 'none';
+        lv++;
+        init();
+    } else {
+        alert('没有更多关卡');
+    }
 }
 function getXY(id) {
     return [
