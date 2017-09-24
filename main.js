@@ -154,3 +154,12 @@ function recall () {
         alert('没有可以撤销的了')
     }
 }
+function retry () {
+    if (stepList.length > 0) {
+        var prev = stepList.shift();
+        boxList = JSON.parse(prev.box);
+        hero = prev.hero;
+        stepList = [];
+        drawBox();
+    }
+}
