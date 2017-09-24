@@ -1,16 +1,15 @@
-var list, boxList, hero;
-var rows, cols;
+var list, boxList, hero, stepList = []; // 静态格子坐标系，箱子id列表，主角坐标，步数列表
+var rows, cols; // 行数，列数
+var SIZE;
 
 var back = document.getElementById('back');
 var bctx = back.getContext('2d');
-var SIZE;
 var cvs = document.getElementById('cvs');
 var ctx = cvs.getContext('2d');
-
+// 获取参数
 var lv = getString('lv') || 0;
-
 var diy = getString('list');
-
+// 初始化
 function init () {
     if (diy) {
         list = JSON.parse(diy);
@@ -28,12 +27,12 @@ function init () {
     back.height = SIZE * rows;
     cvs.width = SIZE * cols;
     cvs.height = SIZE * rows;
+    drawBack();
+    drawBox();
 }
-init();
-
+// 预加载资源
 srcList = ['hero.png','wall.jpg','floor.jpg','target.jpg','box0.jpg','box1.jpg'];
 imgList = [];
-
 srcList.forEach(function (item) {
     var img = new Image();
     img.onload = function () {
@@ -45,8 +44,7 @@ srcList.forEach(function (item) {
 })
 function loading () {
     if (srcList.length == 0) {
-        drawBack();
-        drawBox();
+        init();
     }
 }
 
@@ -129,12 +127,30 @@ function moveHero (dir, dis) {
         nextx[dir] += dis;
         var nextxid = getID(nextx[0],nextx[1])
         if (boxList.indexOf(nextxid) < 0 && list[nextx[0]][nextx[1]] > 1) {
+            stepSave();
             hero = next;
             boxList.splice(boxindex, 1);
             boxList.push(nextxid);
         }
     } else if (list[next[0]][next[1]] > 1) {
+        stepSave();
         hero = next;
     }
     drawBox();
+}
+function stepSave () {
+    stepList.push({
+        box: JSON.stringify(boxList),
+        hero: hero
+    });
+}
+function recall () {
+    if (stepList.length > 0) {
+        var prev = stepList.pop();
+        boxList = JSON.parse(prev.box);
+        hero = prev.hero;
+        drawBox();
+    } else {
+        alert('没有可以撤销的了')
+    }
 }
