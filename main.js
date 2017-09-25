@@ -7,7 +7,7 @@ var bctx = back.getContext('2d');
 var cvs = document.getElementById('cvs');
 var ctx = cvs.getContext('2d');
 // 获取参数
-var lv = getString('lv') || 0;
+var lv = +getString('lv') || 0;
 var diy = getString('list');
 // 初始化
 function init () {
@@ -17,7 +17,7 @@ function init () {
         boxList = JSON.parse(getString('box'));
         hero = JSON.parse(getString('hero'));
     } else {
-        document.title = '推箱子 - ' + (+lv+1) + '/' + LIST.length + '关';
+        document.title = '推箱子 - ' + lv + '/' + LIST.length + '关';
         list = LIST[lv];
         boxList = BOXLIST[lv];
         hero = HERO[lv];
