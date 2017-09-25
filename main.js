@@ -17,7 +17,7 @@ function init () {
         boxList = JSON.parse(getString('box'));
         hero = JSON.parse(getString('hero'));
     } else {
-        document.title = '推箱子 - ' + lv + '/' + LIST.length + '关';
+        document.title = '推箱子 - ' + (lv+1) + '/' + LIST.length + '关';
         list = LIST[lv];
         boxList = BOXLIST[lv];
         hero = HERO[lv];
