@@ -86,12 +86,12 @@ function win() {
 }
 function getXY(id) {
     return [
-        ~~(id / 10),
-        id % 10
+        ~~(id / 100),
+        id % 100
     ]
 }
 function getID(row, col) {
-    return row*10 + col
+    return row*100 + col
 }
 var sX, sY;
 function userPlay () {
