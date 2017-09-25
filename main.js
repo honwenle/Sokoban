@@ -1,4 +1,4 @@
-var list, boxList, hero, stepList = []; // 静态格子坐标系，箱子id列表，主角坐标，步数列表
+var list, boxList, hero, stepList; // 静态格子坐标系，箱子id列表，主角坐标，步数列表
 var rows, cols; // 行数，列数
 var SIZE;
 
@@ -22,6 +22,7 @@ function init () {
         boxList = BOXLIST[lv];
         hero = HERO[lv];
     }
+    stepList = [];
     rows = list.length,
     cols = list[0].length;
     SIZE = ~~(screen.availWidth / cols);
