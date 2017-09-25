@@ -53,7 +53,7 @@ cvsx.addEventListener('click',function (e) {
         return false;
     }
     var x = e.clientX / SIZE | 0;
-    var y = (e.clientY - $('.cvs')[0].offsetTop) / SIZE | 0;
+    var y = (e.clientY - $('.cvs')[0].offsetTop + document.body.scrollTop) / SIZE | 0;
     if (toolid > 0 && toolid < 4) {
         ctx.drawImage(imgList[toolid], x*SIZE, y*SIZE, SIZE, SIZE);
         list[y][x] = toolid;
