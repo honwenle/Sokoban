@@ -78,7 +78,7 @@ cvsx.addEventListener('click',function (e) {
 }, false);
 
 function getID(row, col) {
-    return row*10 + col
+    return row*100 + col
 }
 function generate () {
     location.href = './index.html?list=' + JSON.stringify(list) + '&box=' + JSON.stringify(boxList) + '&hero=' + JSON.stringify(hero);
