@@ -12,10 +12,12 @@ var diy = getString('list');
 // 初始化
 function init () {
     if (diy) {
+        document.title = '推箱子 - 自定义关卡';
         list = JSON.parse(diy);
         boxList = JSON.parse(getString('box'));
         hero = JSON.parse(getString('hero'));
     } else {
+        document.title = '推箱子 - ' + (+lv+1) + '/' + LIST.length + '关';
         list = LIST[lv];
         boxList = BOXLIST[lv];
         hero = HERO[lv];
