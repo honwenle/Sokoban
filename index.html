@@ -23,10 +23,25 @@
         #nextlv{
             display: none;
         }
+        .menu {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        button, a {
+            background: #2196F3;
+            border: 0;
+            padding: 0 10px;
+            line-height: 2;
+            color: #FFEB3B;
+            display: inline-block;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
     <div class="menu">
+        <button class="goback" onclick="history.go (-1)">返回</button>
         <button class="recall" onclick="recall()">撤销</button>
         <button class="retry" onclick="retry()">重试</button>
         <button id="nextlv" onclick="win()">下一关</button>
