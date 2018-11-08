@@ -102,7 +102,7 @@ function userPlay () {
     }, false);
     document.addEventListener('touchmove', function (e) {
         e.preventDefault();
-    }, false);
+    }, {passive: false});
     document.addEventListener('touchend', function (e) {
         var eX = e.changedTouches[0].pageX,
             eY = e.changedTouches[0].pageY;
